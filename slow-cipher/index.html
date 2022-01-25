@@ -11,66 +11,72 @@
   <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
+<body class="container">
   <noscript
     >You need to enable JavaScript to run this
     app.</noscript
   >
-  <main class="container">
+  <main>
     <h1>Slow Cipher Demo</h1>
     <hr/>
-    <h2>Initial values <div class="input-container"><button id="load">Load</button><button id="fill">Fill</button><button id="clear">Clear</button></div></h2>
-    <p class="input-container">
+    <h2>Initial values <div class="input-container">
+      <button id="fill" title="Fill initial values with random values">Fill initial values</button>
+      <button id="load" title="Load last saved state from browser memory">Load last state</button>
+      <button id="clear" title="Clear browser memory and all fields">Clear last state</button>
+    </div></h2>
+    <form id="formInit" class="input-container">
       <div class="input-field">
-        <label for="key">Key</label>
-        <input id="key" type="text" placeholder="Key hex" />    
+        <label for="key">Key <sup>512bit hex</sup></label>
+        <input id="key" type="text" placeholder="Key" required />
       </div>
       <div class='input-field'>
-        <label for="salt">Salt</label>
-        <input id="salt" type="text" placeholder="Salt hex" />
+        <label for="salt">Salt <sup>512bit hex</sup></label>
+        <input id="salt" type="text" placeholder="Salt" required />
       </div>
       <div class='input-field'>
-        <label for="iv">iv</label>
-        <input id="iv" type="text" placeholder="iv hex" /><br/>
+        <label for="iv">Initialization vector (iv) <sup>512bit hex</sup></label>
+        <input id="iv" type="text" placeholder="iv" required /><br/>
       </div><br/>
       <div class='input-field'>
         <label for="stepCount">Step count</label>
-        <input id="stepCount" type="text" placeholder="step count" />
+        <input id="stepCount" type="number" placeholder="step count" required min="0" value="10000" />
       </div>
       <div class='input-field'>
         <label for="startIndex">Start index</label>
-        <input id="startIndex" type="text" placeholder="start index" />
-      </div>
-    </p>
+        <input id="startIndex" type="number" placeholder="start index" required min="0" value="0" />
+      </div>  
+    </form>
 
     <h2>Encryption</h2>
-    <p>
-      <form id="formEncrypt">
-        <label for="inputEncrypt">Secret message<sup>*</sup></label>
-        <input id="inputEncrypt" type="text" value="secret!" placeholder="secret message" required />
-        <input type="submit" value="Encrypt" />
-      </form>  
-    </p>
+    <form id="formEncrypt">
+      <label for="inputEncrypt">Secret message<sup>*</sup></label>
+      <input id="inputEncrypt" type="text" value="secret!" placeholder="secret message" required />
+      <input type="submit" value="Encrypt" />
+    </form>  
 
     <h2>Generated output</h2>
-    <p>
+    <form id="formOutput">
       <label for="computedKey">Computed Key</label>
-      <input id="computedKey" type="text" placeholder="Computed key hex" />
+      <input id="computedKey" type="text" placeholder="Computed key hex" required />
       <div id="output"></div>
-    </p>
+    </form>
     
     <h2>Decryption</h2>
-    <p>
-      <form id="formDecrypt">
-        <label for="inputDecrypt">Encrypted message<sup>*</sup></label>
-        <input id="inputDecrypt" type="text" placeholder="encrypted message" required />
-        <input name='download' type="submit" value="Download view script" />
-        <input type="submit" value="Decrypt" />
-      </form>
+    <form id="formDecrypt">
+      <label for="inputDecrypt">Encrypted message<sup>*</sup></label>
+      <input id="inputDecrypt" type="text" placeholder="encrypted message" required />
+      <input name='download' type="submit" value="Download view script" />
+      <input type="submit" value="Decrypt" />
+    </form>
 
-      <div id="decryptResult"></div>
-    </p>
+    <div id="decryptResult"></div>
   </main>
+  <footer>
+    <span>Copyright © 2022 - All right reserved</span>
+
+    <a href="https://github.com/recallfx/slow-cipher"><img src="gh.png"/></a>
+  </footer>  
+
   <script type="module" src="js/demo.js"></script>
 </body>
 
